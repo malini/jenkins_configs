@@ -9,4 +9,8 @@ m.start_session()
 testvars = {"wifi":{"ssid": sys.argv[1], "keyManagement": "WPA-PSK", "psk": sys.argv[2]}}
 gd = GaiaData(m, testvars=testvars)
 gd.enable_wifi()
+if gd.is_wifi_connected():
+    gd.disable_wifi()
+    gd.forget_all_networks()
+    gd.enable_wifi()
 gd.connect_to_wifi()
