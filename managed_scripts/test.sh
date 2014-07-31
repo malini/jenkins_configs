@@ -1,19 +1,9 @@
 TRIES=0
 cd fxos-certsuite
 
-echo "Setting up virtualenv"
-
-if [ ! -d "certsuite_venv" ]; then
-  virtualenv --no-site-packages certsuite_venv || { echo 'error creating virtualenv' ; exit 1; }
-fi
-
-. certsuite_venv/bin/activate
-python setup.py install
-echo "Done, running the suite"
-runcertsuite > testoutput  2>&1 &
+./run.sh > testoutput  2>&1 &
 
 on_die() {
-  echo "in on_die"
   kill `ps ux | grep runcertsuite | grep -v grep | awk '{ print $2 }'`
   kill `ps ux | grep run.sh | grep -v grep | awk '{ print $2 }'`
   kill `ps ux | grep webapirunner | grep -v grep | awk '{ print $2 }'`
@@ -38,6 +28,9 @@ while [ $TRIES -lt 20 ]; do
       EXIT_CODE=1
     fi
     on_die
+    if [ $EXIT_CODE -eq 0 ]; then
+      echo "Found TEST_START"
+    fi
     exit $EXIT_CODE
   fi
   TRIES=$((TRIES+1))
