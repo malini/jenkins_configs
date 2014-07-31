@@ -24,7 +24,7 @@ while [ $TRIES -lt 20 ]; do
     EXIT_CODE=0
     nc -z localhost 2828
     if [ $? != 0 ]; then
-      echo "Marionette is not running on the device"
+      echo "JENKINS-FAILURE Marionette is not running on the device"
       EXIT_CODE=1
     fi
     on_die
@@ -36,6 +36,6 @@ while [ $TRIES -lt 20 ]; do
   TRIES=$((TRIES+1))
   sleep 5
 done
-echo "didn't get TEST_END in time"
+echo "JENKINS-FAILURE didn't get TEST_END in time"
 on_die
 exit 1
