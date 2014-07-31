@@ -2,8 +2,8 @@ TRIES=0
 
 ./run.sh &> testoutput&
 
-#while [ $TRIES -lt 15 ]; do
-while [ $TRIES -lt 60 ]; do
+while [ $TRIES -lt 15 ]; do
+#while [ $TRIES -lt 60 ]; do
   echo $TRIES
   #NOTE: this is a rough draft. This makes sure we get to the point where we can
   # run the semiauto tests, but if there are issues *during* the test, we 
