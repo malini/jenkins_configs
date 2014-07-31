@@ -1,5 +1,5 @@
 TRIES=0
-
+cd fxos-certsuite
 ./run.sh &> testoutput&
 
 while [ $TRIES -lt 15 ]; do
@@ -10,7 +10,7 @@ while [ $TRIES -lt 15 ]; do
   # don't catch them. For example, if we can't connect to marionette,
   # then we still get TEST_END
   cat testoutput | grep TEST_END
-  if [ $? == 0 ]; then
+  if [ $? -eq 0 ]; then
     EXIT_CODE=0
     nc -z localhost 2828
     if [ $? != 0 ]; then
