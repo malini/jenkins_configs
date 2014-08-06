@@ -1,7 +1,6 @@
 #/bin/bash -e
 
 TRIES=0
-cd fxos-certsuite
 
 ./run.sh > testoutput  2>&1 &
 
